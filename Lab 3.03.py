@@ -225,7 +225,7 @@ Instead of closing the program when the deck is empty, create a way for the user
 
 import random
 
-from pkg_resources import parse_version
+
 
 def shuffled_deck():
     basic_deck = list(range(1,14)) * 4
@@ -240,7 +240,10 @@ def shuffled_deck():
 # returns: integer
 
 # Compares Scores and Returns Player Who Won
+
 def greater_card(p1_card, p2_card):
+    global player_1_draw
+    global player_2_draw
     global points_available
     global player_1_score, player_2_score
     if p1_card > p2_card:
@@ -267,7 +270,24 @@ def greater_card(p1_card, p2_card):
             return f"{player_1_name}: {player_1_score}   {player_2_name}: {player_2_score}" 
     elif player_1_draw == player_2_draw:
         points_available += 2
-        return "War"
+        return "War!"
+    elif len(player_2_deck) == 0 and player_1_draw == player_2_draw:
+            print("You must use a point card as your next card!")
+            player_1_draw = deck.pop(0)
+            player_2_draw = deck.pop(25)
+            if p2_card > p1_card:
+                print(f" {player_2_name} wins the war of {points_available} cards!")
+                player_2_score += points_available
+                player_1_score -= points_available -1
+                points_available = 2
+                return f"{player_1_name}: {player_1_score}   {player_2_name}: {player_2_score}"
+            elif p1_card > p2_card:
+                print(f" {player_1_name} wins the war of {points_available} cards!")
+                player_1_score += points_available
+                player_2_score -= points_available -1
+                points_available = 2
+                return f"{player_1_name}: {player_1_score}   {player_2_name}: {player_2_score}"
+                
 
 
 
@@ -305,7 +325,8 @@ current_player = player_1_name
 current_deck = player_1_deck
 
 
-
+player_1_draw = player_1_deck.pop(0)
+player_2_draw = player_2_deck.pop(0)
 
 
 running = True         
@@ -318,7 +339,7 @@ while len(player_2_deck):
     print(player_turn(player_1_name, player_2_name))
     print(greater_card(player_1_draw, player_2_draw))
     input("Press ENTER to continue to the next round: ")
-
+    
 print()
 if player_1_score > player_2_score:
     print(f"{player_1_name} has won! ")
