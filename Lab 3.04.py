@@ -29,21 +29,21 @@ Draw a stack diagram for the following:
 
  var_1 = "kittens"
  var_2 = "cookies"
-​
+
  # input: a string
  # output: a string
  def my_function(my_favorite_things):
      song_lyrics = "rain drops on roses,"
      combined_song = song_lyrics + my_favorite_things
      return combined_song
-​
+
  # input: a string
  # output: a string
  def my_function_2(item, item2):
      full_lyrics = item + "on " + item2
      full_song = my_function(full_lyrics)
      return full_song
-​
+
 my_song = my_function_2(var_1, var_2)
 
 Complete the following on your own:
@@ -65,9 +65,13 @@ def print_out_my_favorite(favorite_pet):
     if favorite_pet == var_2:
         print("My favorite pet is the dog.")
     var_2 = "cat"
-​
+
+
 print_out_my_favorite(var_1)
 print(var_2)
+
+Define var_1 and var_2 as global in the function 
+
 
 Problem 2
 ---------
@@ -81,9 +85,13 @@ def print_out_my_favorite(favorite_pet):
         print("My favorite pet is the cat.")
     if favorite_pet == var_2:
         print("My favorite pet is the dog.")
-​
+
+
 print_out_my_favorite(var_1)
 print(var_1 + " " + var_2)
+
+Nothing to fix but vould be less redundant
+
 
 Problem 3
 ---------
@@ -99,6 +107,9 @@ def print_out_my_favorite(favorite_pet):
 print_out_my_favorite(var_1)
 print(var_2)
 
+print_out_my_favorite(var_2)
+
+
 In script mode
 ---------------------
 Write a program using the following specifications
@@ -111,6 +122,9 @@ add2: this function adds 2 to my_num
 multiply_num: this function takes in a parameter, multiplier, and multiplies my_num by that parameter
 
 add2_and_multiply: this function takes in a parameter, multiplier, and calls add2, then calls multiply_num.
+
+
+
 
 Complete the program
 --------------------
@@ -126,3 +140,26 @@ prints the final value of my_num
 
 Confirm that the printed values match what you expected.
 '''
+
+
+my_num = 4
+
+def add2(num):
+    num += 2 
+    return num
+
+print(add2(my_num))
+
+def multiply_num(num, multiplier):
+    num *= multiplier
+    return num
+
+print(multiply_num(my_num, 4))
+
+def add2_and_multiply(my_num, multiplier):
+    return multiply_num(add2(my_num), multiplier)
+    
+
+print(add2_and_multiply(my_num, 4))
+
+
